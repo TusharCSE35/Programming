@@ -110,7 +110,7 @@ void sieve(int n)
  
 int main()
 {
-	      cout << "Enter test case : ";
+	cout << "Enter test case : ";
         T{
    	     int n,i;
              cout << "Plz enter the value of N : ";
