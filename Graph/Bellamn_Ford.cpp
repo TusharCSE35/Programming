@@ -139,10 +139,10 @@ int main()
         		if(n==1)break;
         		n=path[n];
         	}
-            reverse(res.begin(),res.end());
-            cout << "Path print : ";
-            for(i=0; i<res.size(); i++)cout << res[i] << " ";
-            cout << endl;	
+                reverse(res.begin(),res.end());
+                cout << "Path print : ";
+                for(i=0; i<res.size(); i++)cout << res[i] << " ";
+                cout << endl;	
         }
         else cout << "Path Not possible." << endl;	
     }
