@@ -69,24 +69,24 @@ int main()
 	  T{
 		      cout << "Plz enter the value of N : ";
 		      cin >> N;
-          int a[N+1],cnt = 0;
+                      int a[N+1],cnt = 0;
           
-          cout << "The elements of N : ";
+                      cout << "The elements of N : ";
 		      for(i = 0; i < N; i++)cin >> a[i];
 
 		      sort(a,a+N);
-          cout << "saerching value of X : ";
+                      cout << "saerching value of X : ";
 		      cin >> x;
 
 		      low_index = 0;
 		      high_index = N;
 
 		      while(low_index <= high_index)
-          {
+                      {
 			          mid = (low_index + high_index)/2;
 
 			         if(a[mid] == x)
-               {
+                                 {
 				            cout << "Yes, x is found and it is " << a[mid] << endl;
 				            cnt++;
 				            break;
@@ -96,7 +96,7 @@ int main()
 		      }
 
 		      if(cnt == 0)
-			    cout << "NO, x is not found" << endl;
+		      cout << "NO, x is not found" << endl;
 	  }
 
 	  return 0;
