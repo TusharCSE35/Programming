@@ -1,89 +1,142 @@
-#include<bits/stdc++.h>
-using namespace std;
 
-#define ll       long long
-#define ull      unsigned ll
-#define pii      pair<int, int>
-#define pll      pair<ll, ll>
-#define mp       make_pair
-#define ff       first
-#define ss       second
-#define sz(x)    (int) x.size()
-#define all(v)   v.begin(),v.end()
+/*********************************************************************************\
+*  _________  _      _  ________  _       _       __       ________               *
+* |___   ___|| |    | ||  ______|| |     | |     /  \     |  ____  |              *
+*     | |    | |    | || |______ | |_____| |    / /\ \    | |____| |              *
+*     | |    | |    | ||______  ||  _____  |   / /__\ \   |  __  __|              *
+*     | |    | |____| | ______| || |     | |  / ______ \  | |  \ \                *
+*     |_|    |________||________||_|     |_| /_/      \_\ |_|   \_\               *
+*                                                                                 *
+*   Department of Computer Science & Engineering                                  *
+*   Student ID : 18CSE035                                                         *
+*   Bangabnadhu Sheikh Mujibur Rahman Science & Technology University,Gopalgonj.  *
+*                                                                                 *
+\*********************************************************************************/
 
-template <typename T> inline void smin(T &a, T b) {a = a < b ? a : b;}
-template <typename T> inline void smax(T &a, T b) {a = a > b ? a : b;}
+//Now Write to Code ___________________________
 
-#define error(args...) { string _s = #args; replace(_s.begin(), _s.end(), ',', ' '); stringstream _ss(_s); istream_iterator<string> _it(_ss); err(_it, args); }
-void err(istream_iterator<string> it) {cout << endl;}
-template<typename T, typename... Args> void err(istream_iterator<string> it, T a, Args... args) {
-	cerr << *it << " = " << a << ", ";
-	err(++it, args...);
-}
 
-template <typename T> inline void Int(T &n) {
-	n = 0; int f = 1; register int ch = getchar();
-	for (; !isdigit(ch); ch = getchar()) if (ch == '-') f = -1;
-	for (; isdigit(ch); ch = getchar()) n = (n << 3) + (n << 1) + ch - '0';
-	n = n * f;
-}
+#include <bits/stdc++.h>
+using namespace std ;
 
-template <typename T, typename TT> inline void Int(T &n, TT &m) { Int(n); Int(m); }
-template <typename T, typename TT, typename TTT> inline void Int(T &n, TT &m, TTT &l) { Int(n, m); Int(l); }
 
-const int mod = (int) 1e9 + 7;
+typedef    long long             ll;
+typedef    unsigned long long    ull;
+typedef    vector<ll>            vl;
+typedef    vector<int>           vi;
+typedef    vector<char>          vc;
+typedef    vector<string>        vs;
+typedef    vector<int>::iterator vit;
+typedef    set<int>              si;
+typedef    set<string>           ss;
+typedef    set<int>::iterator    sit;
+typedef    map<int, int>         mii;
+typedef    map<string, int>      msi;
+typedef    map<int, string>      mis;
+typedef    pair<ll, ll>          pll;
+typedef    pair<int, int>         pii;
 
-inline int add(int a, int b) {a += b; return a >= mod ? a - mod : a;}
-inline int sub(int a, int b) {a -= b; return a < 0 ? a + mod : a;}
-inline int mul(int a, int b) {return (ll) a * b % mod;}
+inline     int         Int()     {int x; cin >> x; return x;}
+inline     ll          Long()    {ll x; cin >> x; return x;}
+inline     float       Float()   {float x; cin >> x; return x;}
+inline     double      Double()  {double x; cin >> x; return x;}
+inline     void        Yes()     {cout << "Yes" << endl;}
+inline     void        No()      {cout << "No" << endl;}
+inline     void        YES()     {cout << "YES" << endl;}
+inline     void        NO()      {cout << "NO" << endl;}
 
-const int inf = (int) 2e9 + 5;
-const ll  Inf = (ll) 2e18 + 5;
-const int N   = (int) 2e5 + 5;
+const      int N       = (int)2e5 + 5;
+const      int maxN    = (int)1e6 + 6;
+const      ll  Mod     = (ll)1e9 + 7;
+const      int inf     = (int)2e9;
+const      ll  Inf     = (ll)1e18;
 
-int par[N], sz[N];
+#define    T           int t,q; cin >> t; for(q=1;q<=t;q++)
+#define    Forn(i,n)   for(int i=0;i<n;i++)
+#define    ForN(i,n)   for(int i=n-1;i>=0;i--)
+#define    forn(i,n)   for(int i=1;i<=n;i++)
+#define    forN(i,n)   for(int i=n;i>=1;i--)
+#define    fors(i,s)   for(int i=0;i<s.size();i++)
+#define    Sort(s)     sort(s.begin(),s.end())
+#define    debug(x)    cerr << #x << " = " << x << '\n' ;
+#define    rep(i,b,e)  for(__typeof(e) i=(b); i!=(e+1)-2*(b>e); i=i+1-2*(b>e))
+#define    gcd(a,b)    __gcd(a , b)
+#define    lcm(a,b)    (a*(b/__gcd(a,b)))
+#define    all(a)      (a).begin(),(a).end()
+#define    rall(a)     (a).rbegin(),(a).rend()
+#define    gt          greater<int>()
+#define    Int         Int()
+#define    Long        Long()
+#define    Float       Float()
+#define    Double      Double()
+#define    endl        '\n'
+#define    sp          <<" "<<
+#define    sz(x)       (int)x.size()
+#define    f           first
+#define    s           second
+#define    pb          push_back
+#define    eb          emplace_back
+#define    mp          make_pair
+#define    mem(a)      memset(a,0,sizeof a)
+#define    memn(a)     memset(a,-1,sizeof a)
+#define    biday       return 0
+#define    nl          endl
+#define    fstp(n)       fixed<<setprecision(n)
+#define    pi          acos(-1)
+#define    PI          3.141592653589793238462643383279502884197169399375105820974944592307816406286208998628034825342
 
-void init(int n) {
-	for (int i = 1; i <= n; i++) {
-		par[i] = i, sz[i] = 1;
+ll parent[N], siz[N];
+set<ll> root;
+
+void Init(ll n) {
+	ll i;
+	for (i = 1; i <= n; i++) {
+		parent[i] = i;
+		siz[i] = 1;
 	}
 }
 
-int Find(int u) {
-	return par[u] == u ? u : par[u] = Find(par[u]);
+ll Find(ll x)
+{
+	if (parent[x] == x)return x;
+	return parent[x] = Find(parent[x]);
 }
 
-void Union(int u, int v) {
-	u = Find(u), v = Find(v);
-	if (u == v) return;
-	if (sz[u] < sz[v]) swap(u, v);
-	par[v] = u;
-	sz[u] += sz[v];
+void Union(ll u, ll v)
+{
+	ll p, q;
+	p = Find(u);
+	q = Find(v);
+
+	if (p == q)return;
+	if (siz[p] < siz[q]) swap(p, q);
+
+	parent[q] = p;
+	siz[p] += siz[q];
 }
 
-int solve() {
-	int n, m; Int(n, m);
-	init(n);
-	for (int i = 1; i <= m; i++) {
-		int u, v; Int(u, v);
+int main()
+{
+	ll node, edge, i;
+	cin >> node >> edge;
+
+	Init(node);
+
+	for (i = 1; i <= edge; i++) {
+		ll u, v;
+		cin >> u >> v;
 		Union(u, v);
 	}
-	set<int> root;
-	for (int i = 1; i <= n; i++) {
-		root.insert(Find(i));
+
+	cout << "Parent Print : " << endl;
+	for (i = 1; i <= node; i++) {
+		cout << i << " parent is : " << parent[i] << endl;
 	}
-	printf("%d\n",sz(root));
-	return 0;
+
+	for (i = 1; i <= node; i++)root.insert(Find(i));
+	cout << root.size() << endl;
+
+	biday;
 }
 
-int main() {
-	//ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-	int test = 1, tc = 0;
-	//Int(test);
-	//cin >> test;
-	while (test--) {
-		//printf("Case %d: ", ++tc);
-		solve();
-	}
-	return 0;
-}
+//...............BYE BYE................*/
