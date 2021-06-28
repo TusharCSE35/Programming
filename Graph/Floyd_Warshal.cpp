@@ -93,7 +93,7 @@ void percel(ll n) {
     for (i = 1; i <= n; i++) {
         for (j = 1; j <= n; j++) {
             if (i == j)dis[i][j] = 0;
-            else dis[i][j] = 50;
+            else dis[i][j] = Inf;
         }
     }
 
