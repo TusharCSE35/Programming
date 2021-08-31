@@ -59,76 +59,106 @@ const ll  Inf           =(ll)1e18;
 #define     mem(a)      memset(a , 0 ,sizeof a)
 #define     memn(a)     memset(a , -1 ,sizeof a)
 #define     biday       return 0 
- 
+#define     PI          3.141592653589793238462643383279502884197169399375105820974944592307816406286208998628034825342
 
-#define mx 100 
-vector <int> graph[mx]; 
-bool visit[mx];
- 
-void graph_print(int n)
+vector <int> G[N];
+int visit[N],par[N],dis[N];
+
+void graphprint(vector<int> G[maxN],int N)
 {
-	int i,j;
-	cout << "The graph is : " << endl;
-	for(i = 0; i < n; i++)
+	ll i,j;
+	cout << "The Graph : " << endl;
+	for(i=1; i<=N; i++)
 	{
-		cout << i << " -> ";
-		for(j = 0; j < graph[i].size(); j++)
-		{
-			cout << graph[i][j] << " ";
-		}
+		cout << i << " --> ";
+		for(j=0; j<G[i].size(); j++)
+			cout << G[i][j] << " ";
 		cout << endl;
-	} 
-}
-
-void DFS(int source)
-{
-	int i,next;
-	visit[source] = 1;
-
-	for(i = 0; i < graph[source].size(); i++)
-	{
-		next = graph[source][i];
-		if(visit[next] == 0)
-		{
-			DFS(next);
-		}
 	}
-
 }
 
+void BFS(int  source)
+{
+    int next,update,i;
+
+	visit[source] = 1;
+	dis[source] = 0;
+
+	queue <ll> Q;
+	Q.push(source);
+	while(!Q.empty())
+	{
+        update = Q.front();
+        Q.pop();
+
+        for(i=0; i<G[update].size(); i++)
+        {
+        	next = G[update][i];
+        	if(!visit[next])
+        	{
+        		par[next] = update;
+        		visit[next] = 1;
+        		dis[next] = dis[update] + 1;
+        		Q.push(next);
+        	}
+        }
+	}
+}
+
+void path(int n)
+{
+    if(par[n])
+    	path(par[n]);
+
+    cout << n <<" ";
+}
+
+ 
 int main()
 {
+	cout << "Enter play of Number : ";
+	T{
+		int N,M,i,u,v,x,y;
+		vll res;
+		cout << "Plz enter vertex && edge : ";
+		cin >> N >> M;
 
-	int node,edge,i,u,v,source;
-	cout << "Plz enter the value of node & edge : ";
-	cin >> node >> edge;
-
-	cout << "Enter the pair of node : " << endl;
-	for(i = 1; i <= edge; i++)
-	{
-		cin >> u >> v;
-		graph[u].push_back(v);
-		graph[v].push_back(u);
+		cout << "Plz enter the pair of vertex : " << endl;
+		for(i=1; i<=M; i++)
+		{
+			cin >> u >> v;
+			G[u].pb(v);
+			G[v].pb(u);
+		}
+		graphprint(G,N);
+		
+		cout << "Plz enter source : ";
+		cin >> x;
+        BFS(x);
+        for(i=1; i<=N; i++)
+        {
+        	cout << i << " --> " << dis[i] << endl;
+        }
+        
+        cout << "Enter Distination : ";
+        cin >> y;
+        if(par[y])
+        {
+        	while(1)
+        	{
+        		res.pb(y);
+        	    if(x==y)break;
+        	    y=par[y];
+        	}
+        	cout << "This path : ";
+        	reverse(res.begin(),res.end());
+        	for(i=0; i<res.size(); i++)cout << res[i] << " ";
+        	cout << endl;	
+        }
+        else cout << "Not Possible " << endl << endl;
 	}
 
-	graph_print(node);
-
-	cout << "Enter the source : ";
-	cin >> source;
-	DFS(source);
     
-    for(i = 0; i < node; i++)
-    {
-    	if(visit[i] == 1)
-    	{
-    		cout << "Node " << i << " is Visited" << endl;
-    	}
-    	else
-    	{
-    		cout << "Node " << i << " is Not Visited" << endl;
-    	}
-    }
-
 
     biday;
 }
