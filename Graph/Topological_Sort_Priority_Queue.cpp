@@ -8,7 +8,7 @@
 *                                                                                 *
 *   Department of Computer Science & Engineering                                  *
 *   Student ID : 18CSE035                                                         *
-*   Bangabnadhu Sheikh Mujibur Rahman Science & Technology University,Gopalgonj.  *
+*   Bangabnadhu Sheikh Mujibur Rahman Science & Technology University,Gopalganj.  *
 *                                                                                 *
 \*********************************************************************************/
 
@@ -17,8 +17,8 @@
 
 #include <bits/stdc++.h>
 using namespace std ;
- 
- 
+
+
 typedef    long long             ll;
 typedef    unsigned long long    ull;
 typedef    vector<ll>            vl;
@@ -27,14 +27,14 @@ typedef    vector<char>          vc;
 typedef    vector<string>        vs;
 typedef    vector<int>::iterator vit;
 typedef    set<int>              si;
-typedef    set<string>           ss;
+typedef    set<string>           s_s;
 typedef    set<int>::iterator    sit;
 typedef    map<int, int>         mii;
 typedef    map<string, int>      msi;
 typedef    map<int, string>      mis;
 typedef    pair<ll, ll>          pll;
-typedef    pair<int,int>         pii;
- 
+typedef    pair<int, int>         pii;
+
 inline     int         Int()     {int x; cin >> x; return x;}
 inline     ll          Long()    {ll x; cin >> x; return x;}
 inline     float       Float()   {float x; cin >> x; return x;}
@@ -43,12 +43,12 @@ inline     void        Yes()     {cout << "Yes" << endl;}
 inline     void        No()      {cout << "No" << endl;}
 inline     void        YES()     {cout << "YES" << endl;}
 inline     void        NO()      {cout << "NO" << endl;}
- 
-const      int N       =(int)2e5 + 5;
-const      int maxN    =(int)1e6 + 6;
-const      ll  Mod     =(ll)1e9 + 7;
-const      int inf     =(int)2e9;
-const      ll  Inf     =(ll)1e18;
+
+const      int N       = (int)2e5 + 5;
+const      int maxN    = (int)1e6 + 6;
+const      ll  Mod     = (ll)1e9 + 7;
+const      int inf     = (int)2e9;
+const      ll  Inf     = (ll)1e18;
 
 #define    T           int t,q; cin >> t; for(q=1;q<=t;q++)
 #define    Forn(i,n)   for(int i=0;i<n;i++)
@@ -71,57 +71,58 @@ const      ll  Inf     =(ll)1e18;
 #define    endl        '\n'
 #define    sp          <<" "<<
 #define    sz(x)       (int)x.size()
-#define    f           first
-#define    s           second
+#define    ff          first
+#define    ss          second
 #define    pb          push_back
 #define    eb          emplace_back
 #define    mp          make_pair
 #define    mem(a)      memset(a,0,sizeof a)
 #define    memn(a)     memset(a,-1,sizeof a)
-#define    biday       return 0 
+#define    biday       return 0
 #define    nl          endl
-#define    fstp(n)       fixed<<setprecision(n)
+#define    fstp(n)     fixed<<setprecision(n)
 #define    pi          acos(-1)
 #define    PI          3.141592653589793238462643383279502884197169399375105820974944592307816406286208998628034825342
- 
- 
+
+#define Mx 100001
+ll dis[Mx];
+vl g[Mx], res;
+
+
 int main()
 {
-    ll n,m,u,v,x,i;
-    cin >> n >> m;
+	ll node, edge, i, cnt = 1, u, v, x;
+	cin >> node >> edge;
 
-    vl g[n+1],res;
-    ll dis[n+1]={0};
-    Forn(i,m)
-    {
-    	cin >> u >> v;
-    	g[u].pb(v);
-    	dis[v]++;
-    }
+	Forn(i, edge) {
+		cin >> u >> v;
+		g[u].pb(v);
+		dis[v]++;
+	}
 
-    priority_queue <ll, vl, greater<ll>> q;
-    for(i=1; i<=n; i++)if(!dis[i])q.push(i);
-    while(!q.empty())
-    {
-    	x=q.top();
-    	q.pop();
-    	res.pb(x);
+	priority_queue<ll, vl, greater<ll>>pq;
+	for (i = 1; i <= node; i++)if (!dis[i])pq.push(i);
 
-    	for(auto it:g[x])
-    	{
-    		dis[it]--;
-    		if(!dis[it])q.push(it);
-    	}
-    }
-    if(res.size())
-    {
-    	Forn(i,n)cout << res[i] << " ";
-    	cout << endl;
-    }
-    else cout << "Not possible because it is cyclic order." << endl;
-    
+	while (!pq.empty()) {
+		x = pq.top();
+		pq.pop();
+		res.pb(x);
 
-    biday;
+		for (auto it : g[x]) {
+			dis[it]--;
+			if (!dis[it])pq.push(it);
+		}
+	}
+
+	for (i = 1; i <= node; i++)if (dis[i])cnt = 0;
+	if (cnt and res.size())for (i = 0; i < res.size(); i++)cout << res[i] << " ";
+	else cout << "Not Possible ";
+
+	cout << endl;
+
+
+	biday;
 }
- 
+
 //...............BYE BYE................
+
