@@ -109,13 +109,17 @@ ll Inv_pow(ll a, ll n) {ll res = 1; while (n) {if (n & 1) res = ((res % Mod) * (
 #define Mx 10005
 ll a[Mx], tree[Mx];
 
-ll read(ll indx) {
+ll quary_next(ll indx) {
 	ll sum = 0;
 	while (indx > 0) {
 		sum += tree[indx];
 		indx -= (indx & -indx);
 	}
 	return sum;
+}
+
+ll query(ll left, ll right) {
+	return quary_next(right) - quary_next(left - 1);
 }
 
 void update(ll indx, ll value, ll n) {
@@ -142,15 +146,17 @@ int solve() {
 
 	cout << "For query : " << endl;
 	while (k--) {
-		ll x, value, indx;
+		ll x;
 		cin >> x;
 		if (x == 1) {
+			ll indx, value;
 			cin >> indx >> value;
 			update(indx, value, n);
 		}
 		else {
-			cin >> indx;
-			cout << read(indx) << endl;
+			ll left, right;
+			cin >> left >> right;
+			cout << query(left, right) << endl;
 		}
 	}
 
