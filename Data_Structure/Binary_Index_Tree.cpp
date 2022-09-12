@@ -111,9 +111,8 @@ ll a[Mx], tree[Mx];
 
 ll quary_next(ll indx) {
 	ll sum = 0;
-	while (indx > 0) {
-		sum += tree[indx];
-		indx -= (indx & -indx);
+	for (ll i = indx; i >= 1; i -= (i & -i)) {
+		sum += tree[i];
 	}
 	return sum;
 }
@@ -123,9 +122,8 @@ ll query(ll left, ll right) {
 }
 
 void update(ll indx, ll value, ll n) {
-	while (indx <= n) {
-		tree[indx] += value;
-		indx += (indx & -indx);
+	for (ll i = indx; i <= n; i += (i & -i)) {
+		tree[i] += value;
 	}
 }
 
