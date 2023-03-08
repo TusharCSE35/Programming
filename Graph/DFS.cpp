@@ -106,57 +106,51 @@ ll gcd(ll a, ll b) { if (b == 0) return a; return gcd(b, a % b);}
 ll ceil_div(ll a, ll b) {return a % b == 0 ? a / b : a / b + 1;}
 ll Inv_pow(ll a, ll n) {ll res = 1; while (n) {if (n & 1) res = ((res % Mod) * (a % Mod)) % Mod; a = ((a % Mod) * (a % Mod)) % Mod; n >>= 1;} return res % Mod;}
 
-#define Mx 100005
-vl g[Mx], trvs;
-ll visit[Mx];
+#define Mx 200005
+vl g[Mx], lvl;
+bool vst[Mx];
+ll cnt = 0;
 
-void graph_print(ll n) {
+void DFS(ll src) {
+	vst[src] = true;
+	lvl.pb(src);
+	for (auto it : g[src]) {
+		if (!vst[it]) {
+			DFS(it);
+		}
+	}
+}
+
+int solve() {
+	ll n, k;
+	cin >> n >> k;
+
+	For(i, 1, k) {
+		ll x, y;
+		cin >> x >> y;
+		g[x].pb(y);
+		g[y].pb(x);
+	}
+
+	cout << "Graph Print : " << endl;
 	For(i, 1, n) {
-		cout << i << " --> ";
+		cout << i << "--> ";
 		for (auto it : g[i]) {
 			cout << it << " ";
 		}
 		cout << endl;
 	}
-}
 
-void DFS(ll src) {
-	visit[src] = 1;
-	for (auto it : g[src]) {
-		if (!visit[it]) {
-			DFS(it);
-		}
-	}
-	trvs.pb(src);
-}
-
-int solve() {
-	ll n, m;
-	cout << "Enter node and edge : ";
-	cin >> n >> m;
-
-	cout << "Enter edges : " << endl;
-	while (m--) {
-		ll u, v;
-		cin >> u >> v;
-		g[u].pb(v);
-		g[v].pb(u);
-	}
-
-	cout << "Graph Print : " << endl;
-	graph_print(n);
-
-	ll cnt = 0;
+	ll componant = 0;
 	For(i, 1, n) {
-		if (!visit[i]) {
-			cnt++;
+		if (!vst[i]) {
 			DFS(i);
+			componant++;
 		}
 	}
-	cout << "Total component : " << cnt << endl;
-	cout << "Traverse : ";
-	reverse(trvs.begin(), trvs.end());
-	for (auto it : trvs)cout << it << " ";
+	cout << "This graph component is : " << componant << endl;
+	cout << "Level_wise print : ";
+	for (auto it : lvl)cout << it << " ";
 	cout << endl;
 
 	biday;
