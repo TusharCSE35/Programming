@@ -162,15 +162,18 @@ int solve() {
 	}
 
 	cout << "Path Print : ";
-	vl res;
-	while (1) {
-		res.pb(dist);
-		if (dist == src)break;
-		dist = path[dist];
+	if (vst[dist]) {
+		vl res;
+		while (1) {
+			res.pb(dist);
+			if (dist == src)break;
+			dist = path[dist];
+		}
+		reverse(res.begin(), res.end());
+		for (auto it : res)cout << it << " ";
+		cout << endl;
 	}
-	reverse(res.begin(), res.end());
-	for (auto it : res)cout << it << " ";
-	cout << endl;
+	else cout << "Not Possible" << endl;
 
 	biday;
 }
