@@ -125,12 +125,12 @@ void Grid_BFS(ll n, ll m, ll u, ll v) {
     }
 }
 
-void path_print(ll n, ll m, ll u, ll v, ll x, ll y) {
+void path_print(ll u, ll v, ll x, ll y) {
     if (u == x and v == y) {
         cout << "[" << x << "," << y << "]" << " ";
         return;
     }
-    path_print(n, m, u, v, path[x][y].ff, path[x][y].ss);
+    path_print(u, v, path[x][y].ff, path[x][y].ss);
     cout << "[" << x << "," << y << "]" << " ";
 }
 
@@ -161,7 +161,7 @@ int solve() {
         if (vst[x][y]) {
             cout << "Grid [" << x << "][" << y << "] : " << dst[x][y] << endl;
             cout << "Path from [" << u << "][" << v << "] to [" << x << "][" << y << "] : ";
-            path_print(n, m, u, v, x, y);
+            path_print(u, v, x, y);
             cout << endl;
         }
         else cout << "Not Possible" << endl;
