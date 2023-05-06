@@ -116,7 +116,6 @@ void tarjan(ll u) {
 		do {
 			v = st.top();
 			st.pop();
-			vst[v] = false;
 			scc_res[scnt].pb(v);
 		}
 		while (u != v);
