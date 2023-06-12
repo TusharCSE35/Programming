@@ -1,149 +1,153 @@
-/*********************************************************************************\
-*  _________  _      _  ________  _       _       __       ________               *
-* |___   ___|| |    | ||  ______|| |     | |     /  \     |  ____  |              *
-*     | |    | |    | || |______ | |_____| |    / /\ \    | |____| |              *
-*     | |    | |    | ||______  ||  _____  |   / /__\ \   |  __  __|              *
-*     | |    | |____| | ______| || |     | |  / ______ \  | |  \ \                *
-*     |_|    |________||________||_|     |_| /_/      \_\ |_|   \_\               *
-*                                                                                 *
-*   Department of Computer Science & Engineering                                  *
-*   Student ID : 18CSE035                                                         *
-*   Bangabnadhu Sheikh Mujibur Rahman Science & Technology University,Gopalgonj.  *
-*                                                                                 *
-\*********************************************************************************/
-
-//Now Write to Code ___________________________
-
-
 #include <bits/stdc++.h>
 using namespace std ;
- 
- 
-typedef    long long             ll;
-typedef    long double           ld;
-typedef    unsigned long long    ull;
-typedef    pair<int,int>         pii;
-typedef    pair<ll,ll>           pll;
-typedef    vector<int>           vi;
-typedef    vector<ll>            vll;
-typedef    vector<vector<int>>   vvi;
- 
-inline     int         Int(){int x; cin >> x; return x;}
-inline     ll          Long(){ll x; cin >> x; return x;}
-inline     float       Float(){float x; cin >> x; return x;}
-inline     double      Double(){double x; cin >> x; return x;}
-inline     void        Yes(){cout << "Yes" << endl;}
-inline     void        No(){cout << "No" << endl;}
-inline     void        YES(){cout << "YES" << endl;}
-inline     void        NO(){cout << "NO" << endl;}
- 
-const      int N       =(int)2e5 + 5;
-const      int maxN    =(int)1e6 + 6;
-const      ll  Mod     =(ll)1e9 + 7;
-const      int inf     =(int)2e9;
-const      ll  Inf     =(ll)1e18;
 
-#define    T           int t,q; cin >> t; for(q=1;q<=t;q++)
-#define    Forn(i,n)   for(int i=0;i<n;i++)
-#define    ForN(i,n)   for(int i=n-1;i>=0;i--)
-#define    forn(i,n)   for(int i=1;i<=n;i++)
-#define    forN(i,n)   for(int i=n;i>=1;i--)
-#define    fors(i,s)   for(int i=0;i<s.size();i++)
+typedef    long long             ll;
+typedef    unsigned long long    ull;
+typedef    vector<int>           vi;
+typedef    vector<ll>            vl;
+typedef    vector<char>          vc;
+typedef    vector<string>        vs;
+typedef    vector<int>::iterator vit;
+typedef    set<int>              si;
+typedef    set<string>           s_s;
+typedef    set<int>::iterator    sit;
+typedef    map<int, int>         mii;
+typedef    map<ll, ll>           mll;
+typedef    map<string, int>      msi;
+typedef    map<string, ll>       msl;
+typedef    map<int, string>      mis;
+typedef    map<int, string>      mls;
+typedef    pair<ll, ll>          pll;
+typedef    pair<int, int>        pii;
+typedef    pair<ll, ll>          pll;
+
+inline     int         Int()     {int x; cin >> x; return x;}
+inline     ll          Long()    {ll x; cin >> x; return x;}
+inline     float       Float()   {float x; cin >> x; return x;}
+inline     double      Double()  {double x; cin >> x; return x;}
+inline     void        Yes()     {cout << "Yes" << endl;}
+inline     void        No()      {cout << "No" << endl;}
+inline     void        YES()     {cout << "YES" << endl;}
+inline     void        NO()      {cout << "NO" << endl;}
+
+const      int N       = (int)2e5 + 5;
+const      int maxN    = (int)1e6 + 6;
+const      ll  Mod     = (ll)1e9 + 7;
+const      int inf     = (int)2e9;
+const      ll  Inf     = (ll)1e18;
+
+#define    test        int t,q; cin >> t; for(q=1;q<=t;q++)
+#define    For(i,p,n)  for(int i=p;i<=n;i++)
+#define    Forb(i,n,p) for(int i=n;i>=p;i--)
+#define    Fors(i,s)   for(int i=0;i<s.size();i++)
 #define    Sort(s)     sort(s.begin(),s.end())
 #define    debug(x)    cerr << #x << " = " << x << '\n' ;
 #define    rep(i,b,e)  for(__typeof(e) i=(b); i!=(e+1)-2*(b>e); i=i+1-2*(b>e))
-#define    gcd(a,b)    __gcd(a , b)
-#define    lcm(a,b)    (a*(b/__gcd(a,b)))
+#define    lcm(a,b)    (a*b)/__gcd(a,b)
+#define    all(a)      (a).begin(),(a).end()
+#define    rall(a)     (a).rbegin(),(a).rend()
 #define    gt          greater<int>()
-#define    Int         Int()
 #define    Long        Long()
 #define    Float       Float()
 #define    Double      Double()
-#define    all(x)      x.begin() , x.end()
+#define    endl        '\n'
+#define    sp          <<" "<<
 #define    sz(x)       (int)x.size()
 #define    ff          first
 #define    ss          second
 #define    pb          push_back
 #define    eb          emplace_back
 #define    mp          make_pair
+#define    bitcount(x) (int)__builtin_popcount(x)
 #define    mem(a)      memset(a,0,sizeof a)
 #define    memn(a)     memset(a,-1,sizeof a)
-#define    biday       return 0 
-#define    nl          endl
-#define    sp(n)       fixed<<setprecision(n)
+#define    biday       return 0
+#define    nl          cout << endl
+#define    pt(s)       cout << s << " "
+#define    fstp(n)     fixed<<setprecision(n)
 #define    pi          acos(-1)
-#define    PI          3.141592653589793238462643383279502884197169399375105820974944592307816406286208998628034825342
- 
 
-void simple_sieve(ll m, vll &prime)
-{
-    ll i,j,limit,x;
-    limit=sqrt(m);
-    x=sqrt(limit)+1;
+//Error Debug
+#define    error(args...) {vector<string>_v=split(#args,',');err(_v.begin(),args);cout<<endl;}
+vector<string> split(const string &s, char c) {vector<string>v; stringstream ss(s); string x; while (getline(ss, x, c))v.emplace_back(x); return move(v);} void err(vector<string>::iterator it) {}
+template<typename T, typename... Args>void err(vector<string>::iterator it, T a, Args...args) {cout << it->substr((*it)[0] == ' ', it->length()) << " = " << a << " "; err(++it, args...);}
 
-    ll visit[limit+5];
-    memset(visit,false,sizeof(visit));
+//Input Int
+template <typename T> inline void Int(T &n) {
+    n = 0; int f = 1; register int ch = getchar();
+    for (; !isdigit(ch); ch = getchar()) if (ch == '-') f = -1;
+    for (; isdigit(ch); ch = getchar()) n = (n << 3) + (n << 1) + ch - '0';
+    n = n * f;
+}
+template <typename T, typename TT> inline void Int(T &n, TT &m) { Int(n); Int(m); }
+template <typename T, typename TT, typename TTT> inline void Int(T &n, TT &m, TTT &l) { Int(n, m); Int(l); }
 
-    for(i=4; i<=limit; i+=2)visit[i]=true;
-    if(limit>=2)prime.pb(2);	
+int dx[8] = {1, 0, -1, 0, -1, -1, 1, 1};
+int dy[8] = {0, 1, 0, -1, -1, 1, -1, 1};
+ll gcd(ll a, ll b) { if (b == 0) return a; return gcd(b, a % b);}
+ll ceil_div(ll a, ll b) {return a % b == 0 ? a / b : a / b + 1;}
+ll Inv_pow(ll a, ll n) {ll res = 1; while (n) {if (n & 1) res = ((res % Mod) * (a % Mod)) % Mod; a = ((a % Mod) * (a % Mod)) % Mod; n >>= 1;} return res % Mod;}
 
-    for(i=3; i<=limit; i+=2)
-    {
-    	if(!visit[i])
-    	{
-    		prime.pb(i);
-    		if(i<=x)
-    		{
-                        for(j=i*i; j<=limit; j+=i*2)
-                 	        visit[j]=true;
-    		}
-    	}
+const ll Mx = 100005;
+bool vst[Mx];
+vl prime;
+
+void sieve() {
+    vst[1] = true;
+    prime.pb(2);
+    for (ll i = 4; i < Mx; i += 2)vst[i] = true;
+    for (ll i = 3; i < Mx; i += 2) {
+        if (!vst[i]) {
+            prime.pb(i);
+            for (ll j = i * i; j < Mx; j += i * 2) {
+                vst[j] = true;
+            }
+        }
     }
 }
 
-void segmented_sieve(ll n,ll m)
-{
-	ll i,j,limit,x,y;
-	vll prime,res;
-	simple_sieve(m,prime);
-	//for(i=0; i<prime.size(); i++)cout << prime[i] << " ";
-	//cout << endl;
+int solve() {
+    ll l, r;
+    cin >> l >> r;
 
-    limit=m-n+1;
-    ll visit[limit+5];
-    memset(visit,false,sizeof(visit));
-    if(n==1)visit[1]=true;
+    bool mark[r - l + 1];
+    For(i, 0, r - l)mark[i] = false;
+    for (ll i = 0; prime[i]*prime[i] <= r; i++) {
+        ll crt_pm = prime[i];
+        ll base = (l / crt_pm) * crt_pm;
+        if (l % crt_pm)base += crt_pm;
 
-    for(i=0; i<prime.size(); i++)
-    {
-    	x=prime[i];
-    	y=(n/x)*x;
-    	if(y<n)y+=x;
-    	if(y==x)y+=x;
-
-    	for(j=y; j<=m; j+=x)visit[j-n+1]=true;
+        for (ll j = base; j <= r; j += crt_pm) {
+            mark[j - l] = true;
+        }
+        if (base == crt_pm)mark[base - l] = false;
+    }
+    if (l == 1)mark[0] = true;
+    For(i, 0, r - l) {
+        if (!mark[i]) {
+            cout << i + l << endl;
+        }
     }
 
-    for(i=1; i<=limit; i++)
-    {
-    	if(!visit[i])
-	{
-    		res.pb(i+n-1);
-	}
-    }
-    for(i=0; i<res.size(); i++)cout << res[i] << endl;	
-}
- 
-int main()
-{
-    T{
-    	ll n,m,i;
-        cin >> n >> m;
-    
-        segmented_sieve(n,m);
-    }
-    
+
     biday;
 }
- 
-//...............BYE BYE................
+
+int main() {
+    // ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+    // #ifndef ONLINE_JUDGE
+    // freopen("input.txt", "r", stdin);
+    // freopen("output.txt", "w", stdout);
+    // #endif // ONLINE_JUDGE
+
+    int t = 1;
+    cin >> t;
+    sieve();
+    for (int i = 1; i <= t; i++) {
+        //error(i)
+        solve();
+    }
+
+    biday;
+}
+//...............BYE BYE................//
