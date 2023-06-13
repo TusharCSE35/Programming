@@ -1,23 +1,5 @@
-/*********************************************************************************\
-*  _________  _      _  ________  _       _       __       ________               *
-* |___   ___|| |    | ||  ______|| |     | |     /  \     |  ____  |              *
-*     | |    | |    | || |______ | |_____| |    / /\ \    | |____| |              *
-*     | |    | |    | ||______  ||  _____  |   / /__\ \   |  __  __|              *
-*     | |    | |____| | ______| || |     | |  / ______ \  | |  \ \                *
-*     |_|    |________||________||_|     |_| /_/      \_\ |_|   \_\               *
-*                                                                                 *
-*   Department of Computer Science & Engineering                                  *
-*   Student ID : 18CSE035                                                         *
-*   Bangabnadhu Sheikh Mujibur Rahman Science & Technology University,Gopalganj.  *
-*                                                                                 *
-\*********************************************************************************/
-
-//Now Write to Code ___________________________
-
-
 #include <bits/stdc++.h>
 using namespace std ;
-
 
 typedef    long long             ll;
 typedef    unsigned long long    ull;
@@ -106,84 +88,71 @@ ll gcd(ll a, ll b) { if (b == 0) return a; return gcd(b, a % b);}
 ll ceil_div(ll a, ll b) {return a % b == 0 ? a / b : a / b + 1;}
 ll Inv_pow(ll a, ll n) {ll res = 1; while (n) {if (n & 1) res = ((res % Mod) * (a % Mod)) % Mod; a = ((a % Mod) * (a % Mod)) % Mod; n >>= 1;} return res % Mod;}
 
-#define Mx 1000005
-bool visit[Mx];
+const ll Mx = 200005;
+bool mark[Mx];
 vl prime;
+ll n_div, s_div;
 
-void sieve(ll n) {
-	if (n >= 1)visit[1] = true;
-	if (n >= 2)prime.pb(2);
+void sieve() {
+	mark[1] = true;
+	prime.pb(2);
 
-	for (ll i = 4; i <= n; i += 2)visit[i] = true;
-	for (ll i = 3; i <= n; i += 2) {
-		if (!visit[i]) {
+	for (ll i = 4; i < Mx; i += 2)mark[i] = true;
+	for (ll i = 3; i < Mx; i += 2) {
+		if (!mark[i]) {
 			prime.pb(i);
-			for (ll j = i * i; j <= n; j += i * 2) {
-				visit[j] = true;
+			for (ll j = i * i; j < Mx; j += i * 2) {
+				mark[j] = true;
 			}
 		}
 	}
 }
 
-ll div_count(ll n) {
-	ll div_ct = 1;
-	for (ll i = 0; prime[i] <= n; i++) {
+void NOD_SOD(ll n) {
+	for (ll i = 0; prime[i]*prime[i] <= n; i++) {
 		if (n % prime[i] == 0) {
 			ll cnt = 1;
 			while (n % prime[i] == 0) {
-				cnt++;
 				n /= prime[i];
+				cnt++;
 			}
-			div_ct *= cnt;
+			n_div *= cnt;
+			s_div *= (pow(prime[i], cnt) - 1) / (prime[i] - 1);
 		}
 	}
-
-	return div_ct;
-}
-
-ll div_sum(ll n) {
-	ll div_sm = 1;
-	for (ll i = 0; prime[i] <= n; i++) {
-		if (n % prime[i] == 0) {
-			ll cnt = 1;
-			while (n % prime[i] == 0) {
-				cnt++;
-				n /= prime[i];
-			}
-			div_sm *= (pow(prime[i], cnt) - 1) / (prime[i] - 1);
-		}
+	if (n > 1) {
+		n_div *= 2;
+		s_div *= (pow(n, 2ll) - 1) / (n - 1);
 	}
-
-	return div_sm;
 }
 
 int solve() {
-	ll n;
-	cout << "Enter n : ";
+	ll n, k;
+	cout << "Enter the value of n : ";
 	cin >> n;
 
-	sieve(n);
-	cout << "Prime of n : ";
-	for (auto it : prime)cout << it << " ";
+	n_div = 1, s_div = 1;
+	NOD_SOD(n);
+
+	cout << "Number of divisor : " << n_div << endl;
+
+	cout << "Summation of divisor : " << s_div << endl;
 	cout << endl;
-
-	ll dc_res = div_count(n);
-	cout << "Divisor count of n : " << dc_res << endl;
-
-	ll ds_res = div_sum(n);
-	cout << "Divisor sum of n : " << ds_res << endl;
 
 	biday;
 }
 
-
 int main() {
-	// ios_base::sync_with_stdio(false);
-	// cin.tie(NULL);
-	// cout.tie(NULL);
+	// ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+	// #ifndef ONLINE_JUDGE
+	// freopen("input.txt", "r", stdin);
+	// freopen("output.txt", "w", stdout);
+	// #endif // ONLINE_JUDGE
 
 	int t = 1;
-	//cin >> t;
+	cout << "Enter test case : ";
+	cin >> t;
+	sieve();
 	for (int i = 1; i <= t; i++) {
 		//error(i)
 		solve();
@@ -191,5 +160,4 @@ int main() {
 
 	biday;
 }
-
 //...............BYE BYE................//
