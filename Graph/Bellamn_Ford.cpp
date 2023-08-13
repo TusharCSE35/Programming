@@ -51,7 +51,7 @@ const      int inf     =(int)2e9;
 const      ll  Inf     =(ll)1e18;
 
 #define    T           int t,q; cin >> t; for(q=1;q<=t;q++)
-#define    Forn(i,n)   for(int i=0;i<n;i++)
+#define    Forn(i,n)   for(int i=1;i<=n;i++)
 #define    ForN(i,n)   for(int i=n-1;i>=0;i--)
 #define    forn(i,n)   for(int i=1;i<=n;i++)
 #define    forN(i,n)   for(int i=n;i>=1;i--)
@@ -109,7 +109,7 @@ ll Bellman(ll source,ll n,ll m)
 				dis[y]=dis[x]+z;
 				update=0;
 				path[y]=x;
-				if(i==n-1)return false;
+				if(i==n)return false;
 			}
 		}
 		if(update)break;
@@ -154,3 +154,28 @@ int main()
 }
  
 //...............BYE BYE................
+
+/*
+INPUT:
+6 9
+1 2 6
+1 3 4
+1 4 5
+4 6 -1
+4 3 -2
+3 5 3
+3 2 -2
+2 5 -1
+5 6 3
+1
+
+OUTPUT:
+Distance from source [1] to :
+[1] = 0
+[2] = 1
+[3] = 3
+[4] = 5
+[5] = 0
+[6] = 3
+Path from 1 to 6 is : 1 4 3 2 5 6
+*/
