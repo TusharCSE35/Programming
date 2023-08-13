@@ -170,12 +170,12 @@ INPUT:
 1
 
 OUTPUT:
-Distance from source [1] to :
-[1] = 0
-[2] = 1
-[3] = 3
-[4] = 5
-[5] = 0
-[6] = 3
-Path from 1 to 6 is : 1 4 3 2 5 6
+Distance from dis[1] to :
+dis[1] --> 0
+dis[2] --> 1
+dis[3] --> 3
+dis[4] --> 5
+dis[5] --> 0
+dis[6] --> 3
+Path print : 1 4 3 2 5 6
 */
