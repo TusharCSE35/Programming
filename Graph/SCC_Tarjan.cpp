@@ -89,66 +89,77 @@ ll ceil_div(ll a, ll b) {return a % b == 0 ? a / b : a / b + 1;}
 ll Inv_pow(ll a, ll n) {ll res = 1; while (n) {if (n & 1) res = ((res % Mod) * (a % Mod)) % Mod; a = ((a % Mod) * (a % Mod)) % Mod; n >>= 1;} return res % Mod;}
 
 const ll Mx = 20005;
-vl grp[Mx], scc_res[Mx];
-bool vst[Mx];
+vl gp[Mx], scc[Mx];
 ll dsc[Mx], low[Mx];
-ll scnt = 0, tcnt = 0;
+bool vst[Mx];
+ll indx, tcnt;
 stack<ll>st;
 
-void tarjan(ll u) {
-	dsc[u] = low[u] = ++tcnt;
-	vst[u] = true;
-	st.push(u);
+void Tarjan(ll src) {
+	dsc[src] = low[src] = ++tcnt;
+	vst[src] = true;
+	st.push(src);
 
-	for (auto v : grp[u]) {
-		if (!dsc[v]) {
-			tarjan(v);
-			low[u] = min(low[u], low[v]);
+	for (auto u : gp[src]) {
+		if (!dsc[u]) {
+			Tarjan(u);
+			low[src] = min(low[src], low[u]);
 		}
-		else if (vst[v]) {
-			low[u] = min(dsc[v], low[u]);
+		else if (vst[u]) {
+			low[src] = min(low[src], dsc[u]);
 		}
 	}
 
-	if (low[u] == dsc[u]) {
-		ll v;
-		scnt++;
+	if (low[src] == dsc[src]) {
+		ll x;
+		indx++;
 		do {
-			v = st.top();
+			x = st.top();
 			st.pop();
-			scc_res[scnt].pb(v);
-		}
-		while (u != v);
+			vst[x] = false;
+			scc[indx].pb(x);
+
+		} while (x != src and !st.empty());
 	}
 }
 
 int solve() {
-	ll n, k;
-	cin >> n >> k;
+	ll n, m;
+	cin >> n >> m;
 
-	For(i, 1, k) {
-		ll u, v;
-		cin >> u >> v;
-		grp[u].pb(v);
+	For(i, 1, m) {
+		ll x, y;
+		cin >> x >> y;
+		gp[x].pb(y);
 	}
 
 	For(i, 1, n) {
 		if (!dsc[i]) {
-			tarjan(i);
+			Tarjan(i);
 		}
 	}
 
-	cout << endl << "Total SCC : " << scnt << endl;
-	cout << "All SCC Print : " << endl;
-	For(i, 1, scnt) {
-		cout << i << "--> ";
-		sort(all(scc_res[i]));
-		for (auto it : scc_res[i]) {
+	cout << "SCC is : " << indx << endl;
+	For(i, 1, indx) {
+		cout << i << " --> ";
+		for (auto it : scc[i]) {
 			cout << it << " ";
 		}
 		cout << endl;
 	}
 
+	// Not Important just check
+	cout << "DSC : ";
+	For(i, 1, n)cout << dsc[i] << " ";
+	cout << endl;
+
+	cout << "LOW : ";
+	For(i, 1, n)cout << low[i] << " ";
+	cout << endl;
+
+	cout << "VST : ";
+	For(i, 1, n)cout << vst[i] << " ";
+	cout << endl;
 
 	biday;
 }
@@ -170,3 +181,28 @@ int main() {
 	biday;
 }
 //...............BYE BYE................//
+
+
+/*
+INPUT:
+7 10
+1 2
+2 3
+2 4
+4 5
+5 1
+5 6
+6 3
+6 7
+7 6
+5 7
+
+OUTPUT:
+SCC is : 3
+1 --> 3
+2 --> 7 6
+3 --> 5 4 2 1
+DSC : 1 2 3 4 5 6 7
+LOW : 1 1 3 1 1 6 6
+VST : 0 0 0 0 0 0 0
+*/
