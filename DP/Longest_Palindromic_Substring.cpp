@@ -1,4 +1,4 @@
-// ॐ नमः शिवाय // 
+// ॐ नमः शिवाय //
 #include <bits/stdc++.h>
 using namespace std ;
 
@@ -91,6 +91,52 @@ ll Inv_pow(ll a, ll n) {ll res = 1; while (n) {if (n & 1) res = ((res % Mod) * (
 
 int solve() {
 	ll n, k;
+	string s;
+	cin >> s;
+
+	n = s.size();
+	ll dp[n][n];
+	For(i, 0, n - 1) {
+		For(j, 0, n - 1) {
+			dp[i][j] = 0;
+			if (i == j)dp[i][j] = 1;
+		}
+	}
+
+	For(k, 1, n) {
+		For(i, 0, n - 1) {
+			ll j = i + k;
+			if (j >= n)break;
+			if (j - i > 1) {
+				if (s[i] == s[j] and dp[i + 1][j - 1]) {
+					dp[i][j] = 1;
+				}
+			}
+			else if (s[i] == s[j]) {
+				dp[i][j] = 1;
+			}
+		}
+	}
+
+	ll l = 0, r = 0, res = 0;
+	For(i, 0, n - 1) {
+		int ltm = n, rtm = -1;
+		For(j, i, n - 1) {
+			if (dp[i][j] == 1) {
+				ltm = min(j, ltm);
+				rtm = max(j, rtm);
+			}
+		}
+		if (rtm - ltm + 1 > res) {
+			res = rtm - ltm + 1;
+			l = ltm;
+			r = rtm;
+		}
+	}
+
+	string ans;
+	For(i, l, r)ans += s[i];
+	cout << ans << endl;
 
 	biday;
 }
@@ -103,7 +149,7 @@ int main() {
 	// #endif // ONLINE_JUDGE
 
 	int t = 1;
-	cin >> t;
+	//cin >> t;
 	for (int i = 1; i <= t; i++) {
 		//error(i)
 		solve();
@@ -112,3 +158,9 @@ int main() {
 	biday;
 }
 //...............BYE BYE................//
+
+
+/*
+INPUT: aaaabbaa
+OUTPUT: aabbaa
+*/
