@@ -1,23 +1,6 @@
-/*********************************************************************************\
-*  _________  _      _  ________  _       _       __       ________               *
-* |___   ___|| |    | ||  ______|| |     | |     /  \     |  ____  |              *
-*     | |    | |    | || |______ | |_____| |    / /\ \    | |____| |              *
-*     | |    | |    | ||______  ||  _____  |   / /__\ \   |  __  __|              *
-*     | |    | |____| | ______| || |     | |  / ______ \  | |  \ \                *
-*     |_|    |________||________||_|     |_| /_/      \_\ |_|   \_\               *
-*                                                                                 *
-*   Department of Computer Science & Engineering                                  *
-*   Student ID : 18CSE035                                                         *
-*   Bangabnadhu Sheikh Mujibur Rahman Science & Technology University,Gopalganj.  *
-*                                                                                 *
-\*********************************************************************************/
-
-//Now Write to Code ___________________________
-
-
+// ॐ नमः शिवाय //
 #include <bits/stdc++.h>
 using namespace std ;
-
 
 typedef    long long             ll;
 typedef    unsigned long long    ull;
@@ -106,32 +89,32 @@ ll gcd(ll a, ll b) { if (b == 0) return a; return gcd(b, a % b);}
 ll ceil_div(ll a, ll b) {return a % b == 0 ? a / b : a / b + 1;}
 ll Inv_pow(ll a, ll n) {ll res = 1; while (n) {if (n & 1) res = ((res % Mod) * (a % Mod)) % Mod; a = ((a % Mod) * (a % Mod)) % Mod; n >>= 1;} return res % Mod;}
 
-
-#define Mx 200005
-vector<pll>graph[Mx];
-bool visit[Mx];
+const ll Mx = 20005;
+bool vst[Mx];
+vector<pair<ll, ll>> gp[Mx];
+ll sum;
 
 ll MST(ll src) {
-	ll sum = 0;
-	priority_queue<pll, vector<pll>, greater<pll> > pq;
+	priority_queue<pair<ll, ll>, vector<pair<ll, ll>>, greater<pair<ll, ll>>>pq;
 	pq.push({0, src});
 
 	while (!pq.empty()) {
 		auto it = pq.top();
-		ll u, w;
-		u = it.ss;
-		w = it.ff;
 		pq.pop();
-		if (!visit[u]) {
+		ll w = it.ff;
+		ll u = it.ss;
+
+		if (!vst[u]) {
+			vst[u] = true;
 			sum += w;
-			visit[u] = true;
-		}
-		for (auto i : graph[u]) {
-			ll v, wt;
-			v = i.ss;
-			wt = i.ff;
-			if (!visit[v]) {
-				pq.push({wt, v});
+
+			for (auto itt : gp[u]) {
+				ll v = itt.ff;
+				ll ww = itt.ss;
+
+				if (!vst[v]) {
+					pq.push({ww, v});
+				}
 			}
 		}
 	}
@@ -140,29 +123,29 @@ ll MST(ll src) {
 }
 
 int solve() {
-	ll node, edge;
-	cout << "Enter node and edge : ";
-	cin >> node >> edge;
+	ll n, k;
+	cin >> n >> k;
 
-	cout << "Enter the edges : " << endl;
-	For(i, 1, edge) {
+	For(i, 1, k) {
 		ll u, v, w;
 		cin >> u >> v >> w;
 
-		graph[u].pb({w, v});
-		graph[v].pb({w, u});
+		gp[u].pb({v, w});
+		gp[v].pb({u, w});
 	}
 
-	cout << "Minimum Spanning Tree : " << MST(1) << endl;
+	ll res = MST(1);
+	cout << "Minimum Spanning Tree is: " << res << endl;
 
 	biday;
 }
 
-
 int main() {
-	// ios_base::sync_with_stdio(false);
-	// cin.tie(NULL);
-	// cout.tie(NULL);
+	// ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+	// #ifndef ONLINE_JUDGE
+	// freopen("input.txt", "r", stdin);
+	// freopen("output.txt", "w", stdout);
+	// #endif // ONLINE_JUDGE
 
 	int t = 1;
 	//cin >> t;
@@ -173,5 +156,4 @@ int main() {
 
 	biday;
 }
-
 //...............BYE BYE................//
